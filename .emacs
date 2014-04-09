@@ -8,6 +8,7 @@
 (setq transient-mark-mode t)
 (setq require-final-newline t)
 (setq-default indent-tabs-mode nil)
+(setq inhibit-startup-message t)
 
 (global-set-key [home] 'beginning-of-line)
 (global-set-key [end] 'end-of-line)
