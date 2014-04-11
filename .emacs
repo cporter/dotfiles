@@ -46,9 +46,14 @@ Return a list of installed packages or nil for every skipped package."
 (or (file-exists-p package-user-dir)
     (package-refresh-contents))
 
-(ensure-package-installed 'magit 'color-theme 'color-theme-solarized) 
+(ensure-package-installed 'magit 'color-theme 'color-theme-solarized 'markdown-mode) 
 
 ;; activate installed packages
 (package-initialize)
 
 (load-theme 'solarized-dark t)
+
+(load-file
+ (concat (file-name-directory (file-truename load-file-name))
+         "google-c-style.el"))
+(add-hook 'c-mode-common-hook 'google-set-c-style)
