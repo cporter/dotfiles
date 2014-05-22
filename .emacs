@@ -46,7 +46,12 @@ Return a list of installed packages or nil for every skipped package."
 (or (file-exists-p package-user-dir)
     (package-refresh-contents))
 
-(ensure-package-installed 'magit 'color-theme 'color-theme-solarized 'markdown-mode) 
+(ensure-package-installed 'magit
+                          'color-theme
+                          'color-theme-solarized
+                          'markdown-mode
+                          'yaml-mode
+                          'd-mode) 
 
 ;; activate installed packages
 (package-initialize)
@@ -57,3 +62,8 @@ Return a list of installed packages or nil for every skipped package."
  (concat (file-name-directory (file-truename load-file-name))
          "google-c-style.el"))
 (add-hook 'c-mode-common-hook 'google-set-c-style)
+
+(setq ispell-program-name "/usr/local/bin/aspell")
+
+(setq c-default-style "stroustrup"
+      c-basic-offset 2)
