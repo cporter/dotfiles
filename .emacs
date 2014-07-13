@@ -66,4 +66,14 @@ Return a list of installed packages or nil for every skipped package."
 (setq ispell-program-name "/usr/local/bin/aspell")
 
 (setq c-default-style "stroustrup"
-      c-basic-offset 2)
+      tab-stop 4
+      innamespace 0
+      c-basic-offset 4)
+(c-set-offset 'innamespace 0)
+
+
+(setq auto-mode-alist
+      (append
+       '(("\\.pro\\'" . yaml-mode)
+         ("\\.protein\\'" . yaml-mode))
+       auto-mode-alist))
