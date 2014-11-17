@@ -1,3 +1,7 @@
+
+ 
+(setq exec-path (cons "~/bin" exec-path))
+
 (if (eq system-type 'darwin)
     (progn
       (setq mac-option-modifier 'meta)
@@ -15,6 +19,7 @@
 (global-set-key "\M-g" 'beginning-of-buffer)
 (global-set-key "\M-G" 'end-of-buffer)
 (global-set-key "\C-p" 'goto-line)
+(global-set-key "\C-f" 'clang-format-region)
 (defalias 'qrr 'query-replace-regexp)
 (defalias 'rr 'replace-regexp)
 
@@ -51,29 +56,59 @@ Return a list of installed packages or nil for every skipped package."
                           'color-theme-solarized
                           'markdown-mode
                           'yaml-mode
+                          'clang-format
                           'd-mode) 
 
+(defvar clang-format-binary "clang-format-3.5")
+ 
 ;; activate installed packages
 (package-initialize)
 
 (load-theme 'solarized-dark t)
 
-(load-file
- (concat (file-name-directory (file-truename load-file-name))
-         "google-c-style.el"))
-(add-hook 'c-mode-common-hook 'google-set-c-style)
-
 (setq ispell-program-name "/usr/local/bin/aspell")
 
-(setq c-default-style "stroustrup"
-      tab-stop 4
-      innamespace 0
-      c-basic-offset 4)
+(setq-default c-default-style "stroustrup"
+              tab-stop 4
+              tab-width 4
+              innamespace 0
+              c-basic-offset 4)
 (c-set-offset 'innamespace 0)
 
+;; Set up Conduce C++ style
+; style I want to use in c++ mode
+(c-add-style "conduce-cxx" 
+	     '("stroustrup"
+	       (indent-tabs-mode . nil)        ; use spaces rather than tabs
+	       (c-basic-offset . 4)            ; indent by four spaces
+               (tab-stop . 4)
+               (tab-width . 4)
+	       (c-offsets-alist . ((inline-open . 0)  ; custom indentation rules
+				   (brace-list-open . 0)
+                   (innamespace . 0)))))
 
-(setq auto-mode-alist
-      (append
-       '(("\\.pro\\'" . yaml-mode)
-         ("\\.protein\\'" . yaml-mode))
-       auto-mode-alist))
+(defun conduce-c++-mode-hook ()
+  (c-set-style "conduce-cxx")        ; use my-style defined above
+  (auto-fill-mode))
+
+(add-hook 'c++-mode-hook 'conduce-c++-mode-hook)
+
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.pro\\'" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.protein\\'" . yaml-mode))
+
+(global-set-key [C-f] 'clang-format-region)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values (quote ((c-default-style . "linux") (tab-stop . 8)))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+ 
