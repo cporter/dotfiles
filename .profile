@@ -1,10 +1,9 @@
-export HOMEBREW_GITHUB_API_TOKEN='9ebfe4efd9f6ebfd9fb3fe0ac57aca436c5e3fa8'
 export PATH="${HOME}/bin:/usr/local/opt/ccache/libexec:$PATH"
 
-if test -f "${HOME}/.ob"
+if test -f "${HOME}/.local_profile"
 then
-	. "${HOME}/.ob"
-fi
+    source "${HOME}/.local_profile"
+endif
 
 alias l=ls
 alias ll="ls -l"

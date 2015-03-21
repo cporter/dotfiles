@@ -1,5 +1,5 @@
 
- 
+(require 'cl) 
 (setq exec-path (cons "~/bin" exec-path))
 
 (if (eq system-type 'darwin)
@@ -59,8 +59,6 @@ Return a list of installed packages or nil for every skipped package."
                           'clang-format
                           'd-mode) 
 
-(defvar clang-format-binary "clang-format-3.5")
- 
 ;; activate installed packages
 (package-initialize)
 
