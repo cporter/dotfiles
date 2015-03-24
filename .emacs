@@ -1,5 +1,6 @@
 
-(require 'cl) 
+(require 'cl)
+(require 'compile)
 (setq exec-path (cons "~/bin" exec-path))
 
 (if (eq system-type 'darwin)
