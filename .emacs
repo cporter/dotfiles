@@ -54,7 +54,6 @@ Return a list of installed packages or nil for every skipped package."
 
 (ensure-package-installed 'magit
                           'color-theme
-                          'color-theme-solarized
                           'markdown-mode
                           'yaml-mode
                           'clang-format
@@ -62,8 +61,6 @@ Return a list of installed packages or nil for every skipped package."
 
 ;; activate installed packages
 (package-initialize)
-
-(load-theme 'solarized-dark t)
 
 (setq ispell-program-name "/usr/local/bin/aspell")
 
@@ -103,11 +100,12 @@ Return a list of installed packages or nil for every skipped package."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(safe-local-variable-values (quote ((c-default-style . "linux") (tab-stop . 8)))))
+ '(safe-local-variable-values (quote ((c-default-style . "linux") (tab-stop . 8))))
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "Source Code Pro" :foundry "adobe" :slant normal :weight semi-bold :height 110 :width normal)))))
  
